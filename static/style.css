@@ -5,8 +5,20 @@ body {
     color: #333;
 }
 
-h1 {
+/* Header styling */
+header {
     text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+h2 {
     color: #4F4F4F;
 }
 
@@ -18,10 +30,34 @@ h1 {
     border-radius: 8px;
 }
 
-.post h2 {
+.post h3 {
     margin-top: 0;
 }
 
 .post p {
     margin: 10px 0;
+}
+
+.read-more {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.read-more:hover {
+    background-color: #0056b3;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background-color: #333;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }

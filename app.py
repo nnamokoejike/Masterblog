@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, request, url_for, redirect
 import json
 
 app = Flask(__name__)
@@ -13,11 +13,61 @@ def load_posts():
         return []
 
 
+def save_posts(posts):
+    with open('blog_posts.json', 'w') as file:
+        json.dump(posts, file)
+
+
 # Index Route: Display all blog posts
 @app.route('/')
 def index():
     blog_posts = load_posts()  # Fetch the blog posts from the JSON file
     return render_template('index.html', posts=blog_posts)
+
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        author = request.form.get('author')
+        title = request.form.get('title')
+        content = request.form.get('content')
+
+        # Load the existing blog posts
+        blog_posts = load_posts()
+
+        # Generate a unique ID for the new post
+        new_id = max([post['id'] for post in blog_posts]) + 1 if blog_posts else 1
+
+        # Create a new blog post dictionary
+        new_post = {
+            'id': new_id,
+            'author': author,
+            'title': title,
+            'content': content
+        }
+
+        # Append the new post to the list
+        blog_posts.append(new_post)
+
+        # Save the updated list to the JSON file
+        save_posts(blog_posts)
+
+        # Redirect to the index page
+        return redirect(url_for('index'))
+    # If it's a Get request, render the form
+    return render_template('add.html')
+
+
+# View Single Post Route
+@app.route('/post/<int:post_id>')
+def view_post(post_id):
+    blog_posts = load_posts()
+    # Find the post by ID
+    post = next((post for post in blog_posts if post['id'] == post_id), None)
+    if post:
+        return render_template('post.html', post=post)
+    else:
+        return 'post not found', 404
 
 
 if __name__ == '__main__':
