@@ -70,5 +70,44 @@ def view_post(post_id):
         return 'post not found', 404
 
 
+@app.route('/delete/<int:post_id>', methods=['post'])
+def delete(post_id):
+    # load existing posts
+    blog_posts = load_posts()
+
+    # Filter out the post to delete
+    blog_posts = [post for post in blog_posts if post['id'] != post_id]
+
+    # Save the updated list back to the JSON file
+    save_posts(blog_posts)
+
+    # Redirect to the home page
+    return redirect(url_for('index'))
+
+
+@app.route('/update/<int:post_id>', methods=['GET', 'POST'])
+def update(post_id):
+    blog_posts = load_posts()
+
+    # Find the post to update
+    post = next((post for post in blog_posts if post['id'] == post_id), None)
+
+    if post is None:
+        return 'Post not found', 404
+
+    if request.method == 'POST':
+        # Update the post details with the form data
+        post['author'] = request.form.get('author')
+        post['title'] = request.form.get('title')
+        post['content'] = request.form.get('content')
+
+        # Save the updated posts back to the JSON file
+        save_posts(blog_posts)
+        return redirect(url_for('index'))
+
+    # Render the update form with the current post data
+    return render_template('update.html', post=post)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

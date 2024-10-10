@@ -23,8 +23,17 @@
                         <h3>{{ post['title'] }}</h3>
                         <p><strong>Author:</strong> {{ post['author'] }}</p>
                         <p>{{ post['content'][:100] }}...</p>
+
                         <!-- Add a link to view the full post -->
                         <a href="/post/{{ post['id'] }}" class="read-more">Read More</a>
+
+                        <!-- Update Button: Link to update route -->
+                        <a href="/update/{{ post['id'] }}" class="update-button">Update</a>
+
+                        <!-- Delete Button: Form that sends a POST request to delete the post -->
+                        <form action="/delete/{{ post['id'] }}" method="post" style="display:inline;">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
                     </li>
                 {% endfor %}
             </ul>

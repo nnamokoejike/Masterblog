@@ -5,21 +5,15 @@ body {
     color: #333;
 }
 
-/* Header styling */
 header {
     text-align: center;
-    padding: 20px;
     background-color: #333;
     color: white;
+    padding: 15px;
 }
 
-h1 {
+h1, h2 {
     margin: 0;
-    font-size: 2em;
-}
-
-h2 {
-    color: #4F4F4F;
 }
 
 .post {
@@ -30,26 +24,43 @@ h2 {
     border-radius: 8px;
 }
 
-.post h3 {
-    margin-top: 0;
-}
-
-.post p {
-    margin: 10px 0;
-}
-
-.read-more {
+.read-more, .delete-button, .update-button {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 15px;
-    background-color: #007BFF;
-    color: white;
     text-decoration: none;
     border-radius: 5px;
 }
 
+.read-more {
+    background-color: #007BFF;
+    color: white;
+}
+
 .read-more:hover {
     background-color: #0056b3;
+}
+
+.delete-button {
+    background-color: #DC3545;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.update-button {
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.update-button:hover {
+    background-color: #c82333;
 }
 
 footer {
@@ -57,7 +68,4 @@ footer {
     padding: 15px;
     background-color: #333;
     color: white;
-    position: absolute;
-    bottom: 0;
-    width: 100%;
 }
