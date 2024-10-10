@@ -34,6 +34,11 @@
                         <form action="/delete/{{ post['id'] }}" method="post" style="display:inline;">
                             <button type="submit" class="delete-button">Delete</button>
                         </form>
+
+                        <!-- Like Button: Form that sends a POST request to like the post -->
+                        <form action="/like/{{ post['id'] }}" method="post" style="display:inline;">
+                            <button type="submit" class="like-button">Like ({{ post['likes'] }})</button>
+                        </form>
                     </li>
                 {% endfor %}
             </ul>

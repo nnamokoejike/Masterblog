@@ -24,7 +24,7 @@ h1, h2 {
     border-radius: 8px;
 }
 
-.read-more, .delete-button, .update-button {
+.read-more, .delete-button, .update-button, .like-button {
     display: inline-block;
     margin-top: 10px;
     padding: 10px 15px;
@@ -53,14 +53,25 @@ h1, h2 {
 }
 
 .update-button {
-    background-color: black;
+    background-color: #17a2b8;
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.update-button:hover {
+    background-color: #138496;
+}
+
+.like-button {
+    background-color: #28a745;
     color: white;
     border: none;
     cursor: pointer;
 }
 
-.update-button:hover {
-    background-color: #c82333;
+.like-button:hover {
+    background-color: #218838;
 }
 
 footer {

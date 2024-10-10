@@ -43,7 +43,8 @@ def add():
             'id': new_id,
             'author': author,
             'title': title,
-            'content': content
+            'content': content,
+            'likes': 0   # Initialize likes to 0
         }
 
         # Append the new post to the list
@@ -107,6 +108,20 @@ def update(post_id):
 
     # Render the update form with the current post data
     return render_template('update.html', post=post)
+
+
+@app.route('/like/<int:post_id>', methods=['POST'])
+def like(post_id):
+
+    blog_posts = load_posts()
+    # Find the post by ID and increment its like count
+    post = next((post for post in blog_posts if post['id'] == post_id), None)
+
+    if post:
+        post['likes'] += 1   # Increment the like count
+        save_posts(blog_posts)   # Save the updated list back to the JSON file
+
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
